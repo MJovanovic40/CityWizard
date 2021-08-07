@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./screens/Home.js"
 import Login from "./screens/Login.js"
 import Register from "./screens/Register"
+import Logout from "./screens/Logout"
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,14 +14,13 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/login">
-          <Login />
+        <Route path="/login" component={Login}>
         </Route>
-        <Route path="/register">
-          <Register />
+        <Route path="/register" component={Register}>
         </Route>
-        <Route path="/">
-          <Home />
+        <Route path="/logout" component={Logout}>
+        </Route>
+        <Route path="/" component={Home}>
         </Route>
       </Switch>
     </Router>

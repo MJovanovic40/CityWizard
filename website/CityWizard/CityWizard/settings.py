@@ -59,7 +59,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
-    'VERIFYING_KEY': None,
+    'VERIFYING_KEY': "secetKey",
     'AUDIENCE': None,
     'ISSUER': None,
 
