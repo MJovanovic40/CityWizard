@@ -1,7 +1,7 @@
 import { translate } from 'ol/transform';
 import { Button, Container, Row } from 'react-bootstrap';
 import Search from '../components/Search';
-import vid from '../media/background-1.mp4';
+import vid from '../media/background-3.mp4';
 
 export default function Home() {
     return (

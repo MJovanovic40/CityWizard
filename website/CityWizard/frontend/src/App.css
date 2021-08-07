@@ -46,7 +46,7 @@ h1 {
 
 #result-container {
   text-align: left;
-  margin-top: 1vh;
+  /*margin-top: 1vh;*/
   position: absolute;
   background-color: white;
   z-index: 1;
