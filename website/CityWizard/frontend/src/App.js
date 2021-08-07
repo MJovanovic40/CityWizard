@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import Search from './components/Search';
+import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import Home from "./screens/Home.js"
 
 function App() {
   return (
-    <Search></Search>
+    <div className="App">
+      <Home />
+    </div>
   );
 }
 
