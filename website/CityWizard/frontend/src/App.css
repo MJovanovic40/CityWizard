@@ -115,7 +115,6 @@ h1 {
   outline: none;
   font-size: 1vw;
   transition: 0.4s;
-  padding-top: 10vh;
 }
 .active, .accordion:hover {
   background-color: #ccc; 
@@ -127,6 +126,7 @@ h1 {
 }
 
 .resultText {
+  text-align: justify;
   font-size: 150%;
   color:wheat
 }
