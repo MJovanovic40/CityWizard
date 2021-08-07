@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+.search-result {
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+}
+.search-result:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+#result-container {
+  position: fixed;
+  width: 100%;
+}
