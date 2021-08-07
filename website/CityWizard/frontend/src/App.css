@@ -103,3 +103,34 @@ h1 {
 ::placeholder{
   color: black;
 }
+
+.containers {
+  margin-left: 10vh;
+  background-color: #F9DEC9;
+  color: #444;
+  cursor: pointer;
+  width:  12vw;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 1vw;
+  transition: 0.4s;
+  padding-top: 10vh;
+}
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+.panel {
+  padding: 0 18px;
+  background-color: #272768;
+  overflow: hidden;
+}
+
+.resultText {
+  font-size: 150%;
+  color:wheat
+}
+
+.resultName {
+  font-size: 350%;
+}

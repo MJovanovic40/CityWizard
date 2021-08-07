@@ -20,7 +20,7 @@ export default function Home() {
                     <h1>Welcome to CityWizard</h1>
                     <p id="motto">Placeholder</p>
                     <Search></Search>
-                    <Button id="luck" size="lg" variant="outline-primary">I'm feeling lucky</Button>{' '}
+                    <Button id="luck" size="lg" variant="outline-primary" href="results">I'm feeling lucky</Button>{' '}
                 </div>
             </Row>
             <Row>
