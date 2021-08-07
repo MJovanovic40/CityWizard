@@ -12,8 +12,9 @@ export default function Home() {
                     <source src={vid} type="video/mp4"></source>
                 </video>
                 <div id="login">
-                    <a href="" id="loginText">Login </a>
-                    <a href="" id="loginText">or Register</a>
+                    <a href="login" id="loginText">Login </a>
+                    or
+                    <a href="register" id="loginText">Register</a>
                 </div>
                 <div id="main">
                     <h1>Welcome to CityWizard</h1>
