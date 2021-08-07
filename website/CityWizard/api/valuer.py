@@ -1,25 +1,30 @@
 import numpy as np
 import pandas as pd
 from math import sqrt
-import house_pricing as hp
+from api import house_pricing as hp
+
 
 def __load_cities():
-    cities = pd.read_csv("california.csv")
+    cities = pd.read_csv("api/california.csv")
     cities.dataframeName = "california.csv"
-    city_list = cities.drop(["city_ascii", "state_id", "state_name", "county_fips", "county_fips_all", "county_name_all", "source", "military", "incorporated", "timezone", "ranking", "zips", "id"], axis = 1)
+    city_list = cities.drop(["city_ascii", "state_id", "state_name", "county_fips", "county_fips_all",
+                             "county_name_all", "source", "military", "incorporated", "timezone", "ranking", "zips", "id"], axis=1)
     return city_list
 
-def __load_housing(koordinate):
-    house_prices = pd.read_csv("housing.csv")
-    house_prices.dataframeName = "housing.csv"
-    prices_list = house_prices.drop(["total_bedrooms", "ocean_proximity"], axis=1)
 
-    cities = pd.read_csv("california.csv")
+def __load_housing(koordinate):
+    house_prices = pd.read_csv("api/housing.csv")
+    house_prices.dataframeName = "housing.csv"
+    prices_list = house_prices.drop(
+        ["total_bedrooms", "ocean_proximity"], axis=1)
+
+    cities = pd.read_csv("api/california.csv")
     cities.dataframeName = "california.csv"
     important_data = cities.drop(
         ["city_ascii", "state_id", "state_name", "county_fips", "county_fips_all", "county_name_all", "source",
          "military", "incorporated", "timezone", "ranking", "zips", "id"], axis=1)
-    coordinate_list = important_data.drop(["county_name", "population", "density"], axis=1)
+    coordinate_list = important_data.drop(
+        ["county_name", "population", "density"], axis=1)
 
     gradovi = coordinate_list.to_numpy()
     cene = prices_list.to_numpy()
@@ -48,8 +53,10 @@ def __load_housing(koordinate):
         right_price = []
         city_counter += 1
         for price in in_rectangle_prices:
-            current_distance = sqrt((city[1]-price[1])**2+(city[2]-price[0])**2)
-            print("[" + str(city_counter) + "/" + str(city_count) + "] - " + city[0] + "dist from site: " + str(current_distance))
+            current_distance = sqrt(
+                (city[1]-price[1])**2+(city[2]-price[0])**2)
+            print("[" + str(city_counter) + "/" + str(city_count) + "] - " +
+                  city[0] + "dist from site: " + str(current_distance))
             if current_distance < min_distance:
                 print("Nova minimalna razdaljina")
                 min_distance = current_distance
@@ -58,15 +65,16 @@ def __load_housing(koordinate):
         right_price_list = right_price.tolist()
         right_price_list.append(city_name)
         data.append(right_price_list)
-    #print(data)
+    # print(data)
     df = pd.DataFrame(data)
-    df.to_csv("house_test.csv", index=False) #Ovde fiksovati NaN
-    indeksi_vrednosti = hp.predikcija("finalized_model_hp.sav", "house_test.csv")
+    df.to_csv("api/house_test.csv", index=False)  # Ovde fiksovati NaN
+    indeksi_vrednosti = hp.predikcija(
+        "api/models/finalized_model_hp.sav", "api/house_test.csv")
 
     scores = []
     for i in indeksi_vrednosti:
         scores.append((i / max(indeksi_vrednosti)) * 10)  # scoring
-    #print(indeksi_vrednosti)
+    # print(indeksi_vrednosti)
 
     cities_list = []
     for i in in_rectangle_cities:
@@ -87,8 +95,7 @@ def __load_housing(koordinate):
     print(finalna_lista)
 
     final_df = pd.DataFrame(finalna_lista)
-    final_df.to_csv("value_indexes.csv", index=False, header=False)
-
+    final_df.to_csv("api/value_indexes.csv", index=False, header=False)
 
 
 def make_city_list(koordinate):
@@ -102,4 +109,4 @@ def make_city_list(koordinate):
     #city_housing_list = hp.get_prediction(housing_coordinates)
 
 
-make_city_list([["37.97391117994576", "-122.72789113562834"], ["37.20401516337056", "-121.70921629477917"]])
+#make_city_list([["37.97391117994576", "-122.72789113562834"], ["37.20401516337056", "-121.70921629477917"]])
