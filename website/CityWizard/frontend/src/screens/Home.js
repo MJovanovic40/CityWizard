@@ -1,13 +1,13 @@
 import { translate } from 'ol/transform';
 import { Button, Container, Row } from 'react-bootstrap';
 import Search from '../components/Search';
-import vid from '../media/background-3.mp4';
+import vid from '../media/background-15.mp4';
 
 export default function Home() {
     return (
         <div>
             <Row className="vh-100" style={{ overflow: "hidden", overflowY: "hidden", margin: 0 }}>
-                <video autoPlay loop muted style={{ position: "absolute", zIndex: "-2", height: "100%", width: "100%", objectFit: "cover", padding: 0 }}>
+                <video autoPlay loop muted style={{ position: "absolute", zIndex: "-2", height: "100%", width: "100%", objectFit: "cover", padding: 0, opacity: 0.9 }}>
                     <source src={vid} type="video/mp4"></source>
                 </video>
                 <div id="login">

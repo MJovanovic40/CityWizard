@@ -14,8 +14,11 @@ html, body {
 #main {
   width:100vw;
   text-align: center;
-  padding-top: 25vh;
-  padding-bottom:25vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 h1 {
@@ -70,4 +73,7 @@ h1 {
   /*position:absolute;*/
   z-index: -1;
   margin-top: 2vh;
+}
+::placeholder{
+  color: white;
 }

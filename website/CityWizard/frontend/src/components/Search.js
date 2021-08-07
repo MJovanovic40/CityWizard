@@ -26,7 +26,7 @@ export default function Search() {
 
     return (
         <div id="search">
-            <Form.Control type="text" placeholder="Search" onChange={(e) => {
+            <Form.Control style={{ backgroundColor: 'transparent', color: 'white', }} type="text" placeholder="Search" onChange={(e) => {
                 getSearches(e.target.value);
             }}></Form.Control>
             {searchResults.length !== 0 &&
