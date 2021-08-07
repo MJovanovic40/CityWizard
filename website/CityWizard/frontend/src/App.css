@@ -53,7 +53,7 @@ h1 {
 }
 
 #search {
-  width: 50vw;
+  width: 35vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
