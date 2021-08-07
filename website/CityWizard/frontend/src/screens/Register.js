@@ -4,7 +4,7 @@ import { BiArrowBack } from "react-icons/bi";
 export default function Register() {
   return (
     <div>
-        <a href="home" className = "back"><BiArrowBack  style = {{position: "absolute", height: "3vh", width: "3vw", marginLeft: -10}}/></a>
+        <a href="home" className = "back"><BiArrowBack  style = {{position: "absolute", height: "3.5vh", width: "3.5vw", marginTop: "0.6vh", marginLeft: "-1vh"}}/></a>
       <div id="registerForm">
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
