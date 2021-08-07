@@ -39,7 +39,7 @@ import {
 } from '../constants/userConstants'
 
 export const login = (email, password) => async (dispatch) => {
-    axios.defaults.baseURL = "http://localhost:8000/"
+    axios.defaults.baseURL = "http://192.168.68.101:8000/"
     try {
         dispatch({
             type: USER_LOGIN_REQUEST
@@ -96,7 +96,7 @@ export const register = (email, password) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            'http://localhost:8000/api/register/',
+            'http://192.168.68.101:8000/api/register/',
             { 'email': email, 'password': password },
             config
         )

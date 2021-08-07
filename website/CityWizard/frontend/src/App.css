@@ -120,9 +120,7 @@ h1 {
   background-color: #ccc; 
 }
 .panel {
-  padding: 0 18px;
-  background-color: #272768;
-  overflow: hidden;
+  color: black
 }
 
 .resultText {
@@ -132,5 +130,5 @@ h1 {
 }
 
 .resultName {
-  font-size: 350%;
+  font-size: 1.5vw;
 }
