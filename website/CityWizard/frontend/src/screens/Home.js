@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap';
+import Search from '../components/Search'
 
 export default function Home() {
     return (
@@ -10,7 +11,8 @@ export default function Home() {
         <div id="main">
             <h1>Welcome to CityWizard</h1>
             <p id= "motto">Placeholder</p>
-            <Button size = "lg" variant="outline-primary">I'm feeling lucky</Button>{' '}
+            <Search></Search>
+            <Button id = "luck" size = "lg" variant = "outline-primary">I'm feeling lucky</Button>{' '}
         </div>
         </div>
     );

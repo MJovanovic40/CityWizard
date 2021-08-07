@@ -38,7 +38,11 @@ h1 {
 }
 
 #result-container {
-  position: fixed;
+  text-align: left;
+  margin-top: 1vh;
+  position: absolute;
+  background-color: white;
+  z-index: 1;
   width: 100%;
 }
 
@@ -46,4 +50,17 @@ h1 {
   font-family: 'Cantarell';
   font-size: 125%;
   font-style: italic;
+}
+
+#search {
+  width: 50vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#luck {
+  /*position:absolute;*/
+  z-index: -1;
+  margin-top: 2vh;
 }
