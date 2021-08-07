@@ -12,8 +12,8 @@ export default function Home() {
                     <source src={vid} type="video/mp4"></source>
                 </video>
                 <div id="login">
-                    <a href="login" id="loginText">Login </a>
-                    or
+                    <a href="login" id="loginText">Login</a>
+                    <p></p>
                     <a href="register" id="loginText">Register</a>
                 </div>
                 <div id="main">
@@ -40,13 +40,13 @@ export default function Home() {
                     </div>
                 </Col>
                 <Col md={5}>
-                    <img src={img1} style={{ objectFit: 'scale-down', height: "40vh", float: "right", marginTop: "1.5vh", textShadow: 10 }}></img>
+                    <img src={img1} style={{ objectFit: 'scale-down', height: "40vh", float: "right", textShadow: 10 }}></img>
                 </Col>
             </Row>
             <br></br>
             <Row style={{ backgroundColor: "rgb(248,249,250)" }}>
                 <Col md={5}>
-                    <img src={img1} style={{ objectFit: 'scale-down', height: "40vh", float: "left", marginTop: "1.5vh" }}></img>
+                    <img src={img1} style={{ objectFit: 'scale-down', height: "40vh", float: "left" }}></img>
                 </Col>
                 <Col md={7}>
                     <div style={{ position: "relative", left: "40%", top: "50%", transform: "translate(-50%, -50%)" }}>
