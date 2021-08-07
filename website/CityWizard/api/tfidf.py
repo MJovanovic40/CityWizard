@@ -28,14 +28,14 @@ def __output_result(tf_idf, summary, city_name):
     for i in range(1, output_length):
         output_words += ", " + tf_idf[i][0]
 
-    output_dir = "summaries"
+    output_dir = "api/summaries"
     output_file = output_dir + "/" + city_name + ".txt"
     # output_file = city_name + ".txt"
     # print(output_words)
     # print(output_file)
     # print(*summary)
 
-    with open(output_file, "w+") as f:
+    with open(output_file, "w+", encoding="utf-8") as f:
         for row in summary:
             f.write(row)
 
@@ -180,9 +180,6 @@ def __main(corpus_path, file_path, city_name):
 
 
 def Summary(city_name):
-    article_dir = "articles"
+    article_dir = "api/articles"
     file = article_dir + "/" + city_name + ".txt"
     __main(article_dir, file, city_name)
-
-
-Summary("Lorem Ipsum")

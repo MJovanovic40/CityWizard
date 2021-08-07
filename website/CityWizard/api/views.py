@@ -5,6 +5,9 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from api.models import User
 import jwt
+from api import tfidf
+import requests
+import os
 
 
 TOKEN_SECRET = "~k47?6KM3WLS.8M%"
@@ -60,3 +63,36 @@ def login(request):
         return Response({"userid": user.id, "email": user.email, "previous_searches": user.previous_searches, "saved_cities": user.saved_cities, "token": user.token}, status=status.HTTP_200_OK)
     else:
         return Response("Invalid email or password", status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['GET'])
+def getWiki(request):
+    params = request.query_params
+    city = params['city']
+
+    with open("api/summaries/summaries.txt", "r", encoding="utf-8") as f:
+        lines = f.readlines()
+        lines = [x.strip() for x in lines]
+        if city in lines:
+            with open(f"api/summaries/{city}.txt", "r", encoding="utf-8") as b:
+                text = b.read()
+                return Response(text)
+
+    wiki = requests.get(
+        f"https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exlimit=max&explaintext&exintro&titles={city}&redirects=").json()
+
+    text = wiki["query"]['pages'][list(
+        wiki["query"]['pages'].keys())[0]]['extract']
+
+    print(os.getcwd())
+
+    with open(f"api/articles/{city}.txt", "w", encoding="utf-8") as f:
+        f.write(text)
+
+    tfidf.Summary(city)
+
+    with open(f"api/summaries/{city}.txt", "r", encoding="utf-8") as f:
+        lines = f.read()
+        with open("api/summaries/summaries.txt", "a", encoding="utf-8") as b:
+            b.write(city + "\n")
+        return Response(lines)
