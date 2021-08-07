@@ -4,6 +4,31 @@ html, body {
   overflow-x: hidden;
 }
 
+#loginForm {
+  padding: 1vw;
+  border: 0.01vw solid black;
+  box-shadow: 5px 10px #888888;
+  border-radius: 3%;
+  width: 20vw;
+  height: 16vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#registerForm {
+  padding: 1vw;
+  border: 0.01vw solid black;
+  box-shadow: 5px 10px #888888;
+  border-radius: 3%;
+  width: 20vw;
+  height: 16vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 #login {
   position: absolute;
@@ -11,6 +36,7 @@ html, body {
   margin-left: 90vw;
   width:100vw;
 }
+
 #main {
   width:100vw;
   text-align: center;
