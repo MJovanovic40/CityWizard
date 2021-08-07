@@ -43,7 +43,6 @@ export default function Home() {
                     <img src={img1} style={{ objectFit: 'scale-down', height: "40vh", float: "right", textShadow: 10 }}></img>
                 </Col>
             </Row>
-            <br></br>
             <Row style={{ backgroundColor: "rgb(248,249,250)" }}>
                 <Col md={5}>
                     <img src={img1} style={{ objectFit: 'scale-down', height: "40vh", float: "left" }}></img>
