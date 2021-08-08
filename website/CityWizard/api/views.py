@@ -102,11 +102,13 @@ def getWiki(request):
 
 @api_view(['GET'])
 def getResults(request):
-    #params = request.query_params
+    params = request.query_params
+    country = params['country']
     # valuer.make_city_list([["37.97391117994576", "-122.72789113562834"],
     # ["37.20401516337056", "-121.70921629477917"]])
+    valuer.make_city_list_from_countries(country)
     resp = {}
-    with open("api/value_indexes.csv", "r") as f:
+    with open(f"api/value_indexes/value_indexes_{country}.csv", "r") as f:
         lines = f.readlines()
         lines = [x.strip() for x in lines]
         for count, i in enumerate(lines):

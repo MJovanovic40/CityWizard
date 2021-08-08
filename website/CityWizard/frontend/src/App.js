@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Switch>
-      <Route path="/results" component={Results}>
+        <Route path="/results/:country/" component={Results}>
         </Route>
         <Route path="/login" component={Login}>
         </Route>

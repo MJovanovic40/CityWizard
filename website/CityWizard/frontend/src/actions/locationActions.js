@@ -18,7 +18,7 @@ export const resultsAction = (country) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.get("http://192.168.68.101:8000/api/getresults/")
+        const { data } = await axios.get("http://192.168.68.101:8000/api/getresults?country=" + country)
 
         dispatch({
             type: SEARCH_RESULT_SUCCESS,

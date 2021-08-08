@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { resultsAction } from '../actions/locationActions'
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import img1 from '../media/city1.jpg';
 
 
 export default function Results({ match }) {
@@ -12,6 +15,8 @@ export default function Results({ match }) {
     const [generalWiki, setGeneralWiki] = useState("")
 
     const [cityList, setcityList] = useState([])
+
+    const [country, setCountry] = useState("")
 
     const dispatch = useDispatch()
 
@@ -25,9 +30,10 @@ export default function Results({ match }) {
     const keys = []
     const cities = []
     useEffect(() => {
+        setCountry(match.params.country)
         if (!results)
-            dispatch(resultsAction(match.params.id));
-        setGeneralWiki(countryDesc("United States"))
+            dispatch(resultsAction(match.params.country));
+        setGeneralWiki(countryDesc(match.params.country))
         if (results) {
             for (var i in results) {
                 keys.push(i)
@@ -58,7 +64,18 @@ export default function Results({ match }) {
                                         <p style={{ fontSize: "0.8vw", marginTop: "0.6vh" }}>{object.city}</p>
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey={index.toString()}>
-                                        <Card.Body>{object.rating}</Card.Body>
+                                        <Card.Body>
+                                            <Row>
+                                                <Col md={6}>
+                                                    <div style={{ height: "10%", width: "30%", position: "relative", left: "50%", transform: "translateX(-50%)" }}>
+                                                        <CircularProgressbar value={object.rating} text={`${object.rating}%`} />
+                                                    </div>
+                                                </Col>
+                                                <Col md={6}>
+                                                    <img style={{ width: "50%", objectFit: "scale-down", position: "relative", left: "50%", transform: "translateX(-50%)" }} src={img1}></img>
+                                                </Col>
+                                            </Row>
+                                        </Card.Body>
                                     </Accordion.Collapse>
                                 </Card>
                             );
@@ -69,7 +86,7 @@ export default function Results({ match }) {
                 </Col>
                 <Col md={6}>
                     <Row>
-                        {generalWiki}
+                        {/*generalWiki*/}
                     </Row>
                 </Col>
             </Row>

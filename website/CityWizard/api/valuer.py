@@ -1,14 +1,18 @@
 import pandas as pd
 from math import sqrt
-import house_pricing as hp
+from api import house_pricing as hp
+import os
+
 
 def __load_cities():
-    cities = pd.read_csv("california.csv")
+    cities = pd.read_csv("api/datasets/california.csv")
     cities.dataframeName = "california.csv"
-    city_list = cities.drop(["city_ascii", "state_id", "state_name", "county_fips", "county_fips_all", "county_name_all", "source", "military", "incorporated", "timezone", "ranking", "zips", "id"], axis = 1)
+    city_list = cities.drop(["city_ascii", "state_id", "state_name", "county_fips", "county_fips_all",
+                             "county_name_all", "source", "military", "incorporated", "timezone", "ranking", "zips", "id"], axis=1)
     return city_list
 
-def __form_final_list(cities, prices):
+
+def __form_final_list(cities, prices, country):
     # Ovo je kinda disgusting
     data = []
     city_count = len(cities)
@@ -19,7 +23,8 @@ def __form_final_list(cities, prices):
         right_price = []
         city_counter += 1
         for price in prices:
-            current_distance = sqrt((city[2] - price[1]) ** 2 + (city[3] - price[0]) ** 2)
+            current_distance = sqrt(
+                (city[2] - price[1]) ** 2 + (city[3] - price[0]) ** 2)
             print("[" + str(city_counter) + "/" + str(city_count) + "] - " + city[0] + " dist from site: " + str(
                 current_distance))
             if current_distance < min_distance:
@@ -35,8 +40,9 @@ def __form_final_list(cities, prices):
     print(data)
 
     df = pd.DataFrame(data)
-    df.to_csv("house_test.csv", index=False)
-    indeksi_vrednosti = hp.predikcija("finalized_model_hp.sav", "house_test.csv")
+    df.to_csv("api/datasets/house_test.csv", index=False)
+    indeksi_vrednosti = hp.predikcija(
+        "api/models/finalized_model_hp.sav", "api/datasets/house_test.csv")
 
     scores = []
     for i in indeksi_vrednosti:
@@ -59,31 +65,37 @@ def __form_final_list(cities, prices):
                 temp = finalna_lista[i]
                 finalna_lista[i] = finalna_lista[j]
                 finalna_lista[j] = temp
-    #print(finalna_lista)
+    # print(finalna_lista)
 
     final_df = pd.DataFrame(finalna_lista)
-    final_df.to_csv("value_indexes.csv", index=False, header=False)
+    filename = "api/value_indexes/value_indexes_" + country + ".csv"
+    final_df.to_csv(filename, index=False, header=False)
+
 
 def __load_housing_by_coordinates(koordinate, state):
-    house_prices = pd.read_csv("housing.csv")
+    house_prices = pd.read_csv("api/datasets/housing.csv")
     house_prices.dataframeName = "housing.csv"
-    prices_list = house_prices.drop(["total_bedrooms", "ocean_proximity"], axis=1)
-    cene = prices_list.to_numpy()  # We would need much more data to better represent this.
+    prices_list = house_prices.drop(
+        ["total_bedrooms", "ocean_proximity"], axis=1)
+    # We would need much more data to better represent this.
+    cene = prices_list.to_numpy()
 
     gradovi = []
     coordinate_list = []
     if state == 1:
-        cities = pd.read_csv("california.csv")
+        cities = pd.read_csv("api/datasets/california.csv")
         cities.dataframeName = "california.csv"
         important_data = cities.drop(
             ["city_ascii", "state_id", "county_fips", "county_fips_all", "county_name_all", "source",
              "military", "incorporated", "timezone", "ranking", "zips", "id"], axis=1)
-        coordinate_list = important_data.drop(["county_name", "density"], axis=1)
+        coordinate_list = important_data.drop(
+            ["county_name", "density"], axis=1)
         gradovi = coordinate_list.to_numpy()
     else:
-        cities = pd.read_csv("worldcities.csv")
+        cities = pd.read_csv("api/datasets/worldcities.csv")
         cities.dataframeName = "worldcities.csv"
-        coordinate_list = cities.drop(["city_ascii", "iso2", "iso3", "admin_name", "capital", "id"], axis=1)
+        coordinate_list = cities.drop(
+            ["city_ascii", "iso2", "iso3", "admin_name", "capital", "id"], axis=1)
         gradovi = coordinate_list.to_numpy()
         for grad in gradovi:
             temp = grad[3]
@@ -104,14 +116,17 @@ def __load_housing_by_coordinates(koordinate, state):
 
 
 def __load_housing_by_country(country):
-    house_prices = pd.read_csv("housing.csv")
+    house_prices = pd.read_csv("api/datasets/housing.csv")
     house_prices.dataframeName = "housing.csv"
-    prices_list = house_prices.drop(["total_bedrooms", "ocean_proximity"], axis=1)
-    cene = prices_list.to_numpy()  # We would need much more data to better represent this.
+    prices_list = house_prices.drop(
+        ["total_bedrooms", "ocean_proximity"], axis=1)
+    # We would need much more data to better represent this.
+    cene = prices_list.to_numpy()
 
-    cities = pd.read_csv("worldcities.csv")
+    cities = pd.read_csv("api/datasets/worldcities.csv")
     cities.dataframeName = "worldcities.csv"
-    coordinate_list = cities.drop(["city_ascii", "iso2", "iso3", "admin_name", "capital", "id"], axis=1)
+    coordinate_list = cities.drop(
+        ["city_ascii", "iso2", "iso3", "admin_name", "capital", "id"], axis=1)
     gradovi = coordinate_list.to_numpy()
     for grad in gradovi:
         temp = grad[3]
@@ -124,7 +139,8 @@ def __load_housing_by_country(country):
         if grad[1] == country:
             in_country_cities.append(grad)
 
-    __form_final_list(in_country_cities, cene)
+    __form_final_list(in_country_cities, cene, country)
+
 
 def make_city_list_from_coordinates(koordinate):
     tacka1 = koordinate[0]
@@ -133,9 +149,17 @@ def make_city_list_from_coordinates(koordinate):
     print("Bottom right: " + str(tacka2))
     __load_housing_by_coordinates(koordinate, 0)
 
+
 def make_city_list_from_countries(country):
     print("Country: " + country)
-    __load_housing_by_country(country)
+    filename = "api/value_indexes/value_indexes_" + country + ".csv"
+    if os.path.isfile(filename):
+        print("Already done")
+    else:
+        print("Calculating...")
+        __load_housing_by_country(country)
+        print("Done")
+
 
 #make_city_list_from_coordinates([["45.29796572030068", "19.54361186540114"], ["44.20081106786184", "21.529494679356073"]])
-make_city_list_from_countries("Trinidad And Tobago")
+#make_city_list_from_countries("Trinidad And Tobago")
