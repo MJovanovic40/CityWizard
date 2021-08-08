@@ -1,18 +1,17 @@
 import math
 
-import numpy as np  # linear algebra
-import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import sklearn
-import seaborn as sns
+import seaborn as sns 
 import pickle
 from sklearn.metrics import r2_score
 from sklearn.preprocessing import StandardScaler
 
-
 def predikcija(model_name, df):
-
+    
     filename = model_name
     model = pickle.load(open(filename, 'rb'))
 
@@ -36,9 +35,10 @@ def predikcija(model_name, df):
     odnos_average = sum(odnos)/len(odnos)
     #print("Average: " + str(odnos_average))
 
+
     indeksi_vrednosti = []
     for i in odnos:
-        indeksi_vrednosti.append(i*(math.e**(1/(abs(i-odnos_average)))))
+        indeksi_vrednosti.append(i*(math.e**(1/((abs(i-odnos_average))+0.01))))
         if indeksi_vrednosti[-1] < 0:
             indeksi_vrednosti[-1] = 0
 
@@ -49,7 +49,9 @@ def predikcija(model_name, df):
     '''for indeks in indeksi_vrednosti:
         print(indeks)'''
 
+    '''df_predicted = pd.DataFrame(return_data)
+    df_predicted.to_csv(f"output_predicted2.csv")'''
+
     return indeksi_vrednosti
 
-
-# predikcija(model_name="api/models/finalized_model_hp.sav",df="api/house_test.csv")
+predikcija(model_name = "finalized_model_hp.sav", df = "house_test.csv")
