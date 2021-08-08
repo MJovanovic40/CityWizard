@@ -6,37 +6,19 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     userLoginReducer,
     userRegisterReducer,
-    //userDetailsReducer,
-    //userUpdateProfileReducer,
-    //userListReducer,
-    //userDeleteReducer,
-    //userUpdateReducer,
-    //getUserReducer,
 } from './reducers/userReducers'
 
-/*import {
-    projectListReducer,
-    projectDeleteReducer,
-    projectCreateReducer,
-    projectUpdateReducer,
-    projectDetailsReducer,
-} from './reducers/projectReducers'*/
+import {
+    searchResultReducer,
+} from './reducers/locationReducers'
+
+
 
 const reducer = combineReducers({
-    /*projectCreate: projectCreateReducer,
-    projectDelete: projectDeleteReducer,
-    projectList: projectListReducer,
-    projectUpdate: projectUpdateReducer,
-    projectDetails: projectDetailsReducer,*/
-
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
-    /*userDetails: userDetailsReducer,
-    userUpdateProfile: userUpdateProfileReducer,
-    userList: userListReducer,
-    userDelete: userDeleteReducer,
-    userUpdate: userUpdateReducer,
-    userGet: getUserReducer,*/
+    search: searchResultReducer,
+
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
