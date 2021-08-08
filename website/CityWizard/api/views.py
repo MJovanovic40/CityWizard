@@ -83,8 +83,11 @@ def getWiki(request):
     wiki = requests.get(
         f"https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exlimit=max&explaintext&exintro&titles={city}&redirects=").json()
 
-    text = wiki["query"]['pages'][list(
-        wiki["query"]['pages'].keys())[0]]['extract']
+    try:
+        text = wiki["query"]['pages'][list(
+            wiki["query"]['pages'].keys())[0]]['extract']
+    except:
+        text = ""
 
     print(os.getcwd())
 
@@ -106,13 +109,33 @@ def getResults(request):
     country = params['country']
     # valuer.make_city_list([["37.97391117994576", "-122.72789113562834"],
     # ["37.20401516337056", "-121.70921629477917"]])
-    valuer.make_city_list_from_countries(country)
+    # valuer.make_city_list_from_countries(country)
     resp = {}
-    with open(f"api/value_indexes/value_indexes_{country}.csv", "r") as f:
+    with open(f"api/value_indexes/value_indexes_{country}.csv", "r", encoding="utf-8") as f:
         lines = f.readlines()
         lines = [x.strip() for x in lines]
         for count, i in enumerate(lines):
             line = i.split(",")
-            resp[int(count+1)] = {'city': line[0],
-                                  'rating': math.floor(float(line[1])*10)}
+            try:
+                resp[int(count+1)] = {'city': line[0],
+                                      'rating': math.floor(float(line[1])*10)}
+            except:
+                resp[int(count+1)] = {'city': line[0]+line[1],
+                                      'rating': math.floor(float(line[2])*10)}
+    return Response(resp)
+
+
+@api_view(['POST'])
+def getSearches(request):
+    data = request.data
+    search = data['search']
+    searches = []
+
+    files = os.listdir("api/value_indexes")
+    resp = []
+    for i in files:
+        file = i.split("_")[-1].split(".")[0]
+        if file.find(search) != -1:
+            resp.append(file)
+
     return Response(resp)

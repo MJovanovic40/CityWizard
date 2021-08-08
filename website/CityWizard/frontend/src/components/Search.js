@@ -11,17 +11,20 @@ export default function Search() {
             setSearchResults([]);
             return [];
         }
-        const { data } = await axios.get("http://autocomplete.travelpayouts.com/places2?term=" + ser + "&locale=en&types[]=country");
+        const { data } = await axios.post("http://192.168.68.101:8000/api/getsearches/", {"search": ser});
 
         let results = [];
 
         for (let i = 0; i < data.length; i++) {
             if (i < 5) {
-                results.push(data[i].name);
+                results.push(data[i]);
             }
         }
         setSearchResults(results);
         return results;
+    }
+    function goToResults(result){
+        window.location.href = "http://192.168.68.101:3000/results/"+ result.toString();
     }
 
     return (
@@ -33,7 +36,9 @@ export default function Search() {
                 <div id="result-container">
                     {searchResults.map(result => {
                         return (
-                            <h4 onClick={() => { console.log("clicked") }} class="search-result">{result}</h4>
+                            <h4 onClick={() => { 
+                                goToResults(result)
+                             }} class="search-result">{result}</h4>
                         )
                     })}
                 </div>

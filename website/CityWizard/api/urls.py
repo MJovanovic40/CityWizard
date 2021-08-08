@@ -7,4 +7,5 @@ urlpatterns = [
     path('login/', views.login, name="login"),
     path('getwiki/', views.getWiki, name="getWiki"),
     path('getresults/', views.getResults, name="getResults"),
+    path('getsearches/', views.getSearches, name="getSearches"),
 ]
