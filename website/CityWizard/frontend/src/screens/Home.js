@@ -23,7 +23,7 @@ export default function Home() {
                         <a href="register" id="loginText">Register</a>
                     </div>
                     :
-                    <DropdownButton id="dropdown-basic-button" title={userInfo.email} style={{ backgroundColor: "transparent", float: "right" }}>
+                    <DropdownButton id="dropdown-basic-button" title={userInfo.email} style={{ backgroundColor: "transparent", position: "absolute", marginLeft: "85vw", marginTop:"3vh" }}>
                         <Dropdown.Item href="/logout">Logout</Dropdown.Item>
                     </DropdownButton>
                 }
