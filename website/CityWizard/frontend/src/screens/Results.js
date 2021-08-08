@@ -9,7 +9,6 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import img1 from '../media/city1.jpg';
 import { BiArrowBack } from "react-icons/bi";
-import '../App.css';
 
 
 export default function Results({ match }) {
@@ -48,7 +47,7 @@ export default function Results({ match }) {
     }, [match, results])
 
     async function countryDesc(country) {
-        const { data } = await axios.get("http://192.168.68.101:8000/api/getwiki/?city=" + country)
+        const { data } = await axios.get("http://52.57.159.2:8000/api/getwiki/?city=" + country)
         setGeneralWiki(data)
         return data
     }
@@ -60,7 +59,7 @@ export default function Results({ match }) {
             if(i>14){
                 continue;
             }
-            const { data } = await axios.get("http://192.168.68.101:8000/api/getwiki/?city=" + cities[i].city)
+            const { data } = await axios.get("http://52.57.159.2:8000/api/getwiki/?city=" + cities[i].city)
             l.push(data)
         }
         setCityWiki(l)

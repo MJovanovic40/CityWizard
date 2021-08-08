@@ -6,7 +6,7 @@ import {
 import axios from 'axios'
 
 export const resultsAction = (country) => async (dispatch) => {
-    axios.defaults.baseURL = "http://192.168.68.101:8000/"
+    axios.defaults.baseURL = "http://52.57.159.2:8000/"
     try {
         dispatch({
             type: SEARCH_RESULT_REQUEST
@@ -18,7 +18,7 @@ export const resultsAction = (country) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.get("http://192.168.68.101:8000/api/getresults?country=" + country)
+        const { data } = await axios.get("http://52.57.159.2:8000/api/getresults?country=" + country)
 
         dispatch({
             type: SEARCH_RESULT_SUCCESS,
