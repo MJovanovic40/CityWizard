@@ -131,6 +131,6 @@ h1 {
   font-size: 1.5vw;
 }
 
-.kartica {
-  margin-top: 1vh;
+.bullets {
+  list-style-type: none;
 }
