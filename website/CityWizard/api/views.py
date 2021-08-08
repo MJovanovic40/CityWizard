@@ -9,6 +9,7 @@ from api import tfidf
 import requests
 import os
 from api import valuer
+import math
 
 
 TOKEN_SECRET = "~k47?6KM3WLS.8M%"
@@ -102,6 +103,14 @@ def getWiki(request):
 @api_view(['GET'])
 def getResults(request):
     #params = request.query_params
-    valuer.make_city_list([["37.97391117994576", "-122.72789113562834"],
-                           ["37.20401516337056", "-121.70921629477917"]])
-    return Response("OK")
+    # valuer.make_city_list([["37.97391117994576", "-122.72789113562834"],
+    # ["37.20401516337056", "-121.70921629477917"]])
+    resp = {}
+    with open("api/value_indexes.csv", "r") as f:
+        lines = f.readlines()
+        lines = [x.strip() for x in lines]
+        for count, i in enumerate(lines):
+            line = i.split(",")
+            resp[int(count+1)] = {'city': line[0],
+                                  'rating': math.floor(float(line[1])*10)}
+    return Response(resp)
